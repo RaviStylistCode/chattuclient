@@ -28,7 +28,7 @@ const App = () => {
     //     userId: isAuth?._id,
     //   },
     // });
-    socket = io("https://chattuserver.vercel.app", {
+    socket = io("https://chattuserver.onrender.com/", {
       query: {
         userId: isAuth?._id,
       },
