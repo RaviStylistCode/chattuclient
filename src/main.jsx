@@ -9,7 +9,7 @@ import { persistStore } from "redux-persist";
 
 
 // export const serverapi ="http://localhost:8000/api/v1";
-export const serverapi ="https://chattuserver.vercel.app/api/v1";
+export const serverapi ='https://chattuserver.onrender.com/api/v1';
 
 let persistor = persistStore(store);
 
