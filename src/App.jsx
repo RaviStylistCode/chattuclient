@@ -23,6 +23,11 @@ const App = () => {
   let socket;
 
   useEffect(() => {
+    // socket = io("http://localhost:8000", {
+    //   query: {
+    //     userId: isAuth?._id,
+    //   },
+    // });
     socket = io("https://chattuserver.vercel.app", {
       query: {
         userId: isAuth?._id,

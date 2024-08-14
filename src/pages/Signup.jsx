@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import {serverapi} from "../main"
+import { serverapi } from "../main";
 
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [gender, setGender] = useState("");
+
+  const navigate = useNavigate();
 
   const handlesubmit = async (e) => {
     e.preventDefault();
@@ -18,94 +20,95 @@ const Signup = () => {
         `${serverapi}/users/register`,
         { name, email, password, gender },
         {
-            headers:{
-                'Content-Type':'application/json'
-            },
-            withCredentials:true
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          withCredentials: true
         }
       );
 
-      console.log(res)
-      Navigate("/");
+      console.log(res);
+      navigate("/");
     } catch (error) {
-        console.log(error.response.data.message)
+      console.log(error.response.data.message);
     }
   };
+
   return (
-    <div className="w-full h-[100vh] flex justify-center align-middle items-center m-5 p-2 bg-rose-400">
-      <div className="w-120 items-center  bg-accent gap-3 flex-2">
-        <h1 className="text-2xl text-center font-bold text-gray-300">
+    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 p-5">
+      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
+        <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
           Create Your Account
         </h1>
 
         <form method="post" onSubmit={handlesubmit}>
-          <div className="flex flex-col gap-3 p-2">
-            <label htmlFor="" className="flex flex-col sm:flex-row gap-3 ">
-              <span className="text-2xl text-gray-200">Name</span>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Name
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="input input-bordered w-96"
-                placeholder="enter your name"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Enter your name"
               />
             </label>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 p-2">
-            <label htmlFor="" className="flex flex-col sm:flex-row gap-3 ">
-              <span className="text-2xl text-gray-200">Email</span>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Email
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input input-bordered w-96"
-                placeholder="enter your email"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Enter your email"
               />
             </label>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 p-2">
-            <label htmlFor="" className="flex flex-col sm:flex-row gap-3 ">
-              <span className="text-2xl text-gray-200">Password</span>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Password
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="input input-bordered w-96"
-                placeholder="enter your password"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Enter your password"
               />
             </label>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 p-2">
-            <label htmlFor="" className="flex flex-col sm:flex-row gap-3 ">
-              <span className="text-2xl text-gray-200">Gender</span>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Gender
               <select
-                className="w-96"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                value={gender}
                 onChange={(e) => setGender(e.target.value)}
               >
-                <option value="0">.....</option>
+                <option value="">Select your gender</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
+                <option value="other">Other</option>
               </select>
             </label>
           </div>
 
-          <div>
-            <p>
-              Already have an account ? <Link to={"/login"}>Login</Link>{" "}
+          <div className="flex items-center justify-between mb-6">
+            <p className="text-sm">
+              Already have an account? <Link to="/login" className="text-blue-500 hover:text-blue-800">Login</Link>
             </p>
           </div>
 
-          <div className="flex-1">
-            <label htmlFor="" className="items-center ">
-              <input
-                type="submit"
-                value="Signup"
-                className="input input-bordered w-96 cursor-pointer"
-              />
-            </label>
+          <div className="flex items-center justify-center">
+            <input
+              type="submit"
+              value="Signup"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer"
+            />
           </div>
         </form>
       </div>
